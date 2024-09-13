@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocalStorage } from "../useLocalStorage.js";
 import { useNavigate } from "react-router-dom";
+import "./styles/register.css";
 
 const RegisterPage = () => {
   const fields = {
@@ -18,24 +19,28 @@ const RegisterPage = () => {
   const register = (event) => {
     event.preventDefault();
     const savedUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const isUserExists = savedUsers.some(user => user.userName === userName);
+    const isUserExists = savedUsers.some((user) => user.userName === userName);
 
     if (!userName || !email || !password) {
-      return alert("Заполните все поля");
+      return alert("Empty");
     } else if (isUserExists) {
       return alert("You already registered");
     } else {
-      const newUser = { userName, email, password, avatarUrl: '', id: Date.now(), createdAt: new Date() };
+      const newUser = {
+        userName,
+        email,
+        password,
+        avatarUrl: "",
+        id: Date.now(),
+        createdAt: new Date(),
+      };
       savedUsers.push(newUser);
       localStorage.setItem("users", JSON.stringify(savedUsers));
 
-      // Удаляем старые данные о текущем пользователе
       localStorage.removeItem("currentUser");
 
-      // Устанавливаем текущего пользователя в localStorage
       localStorage.setItem("currentUser", JSON.stringify(newUser));
 
-      // Перенаправляем на страницу входа
       navigate("/login");
     }
   };

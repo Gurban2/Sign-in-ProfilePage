@@ -9,13 +9,13 @@ const LoginPage = () => {
   const login = (event) => {
     event.preventDefault();
     const savedUsers = JSON.parse(localStorage.getItem("users")) || [];
-    const user = savedUsers.find(user => user.userName === userName && user.password === password);
+    const user = savedUsers.find(
+      (user) => user.userName === userName && user.password === password
+    );
 
     if (user) {
-      // Устанавливаем текущего пользователя в localStorage
       localStorage.setItem("currentUser", JSON.stringify(user));
 
-      // Перенаправляем на страницу профиля
       navigate("/profile");
     } else {
       alert("Invalid credentials");

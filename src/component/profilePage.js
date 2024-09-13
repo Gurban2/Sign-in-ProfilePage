@@ -9,7 +9,7 @@ const Profile = () => {
 
   useEffect(() => {
     const localUser = JSON.parse(localStorage.getItem("currentUser"));
-    console.log("Fetched User Data:", localUser); // Проверяем данные из localStorage
+    console.log("Fetched User Data:", localUser);
 
     if (localUser) {
       setUser(localUser);
@@ -25,7 +25,10 @@ const Profile = () => {
       <div className="avatar">
         <div className="avatar-wrapper">
           {user.avatarUrl ? (
-            <img src={user.avatarUrl} alt={`${user.userName || "User"} avatar`} />
+            <img
+              src={user.avatarUrl}
+              alt={`${user.userName || "User"} avatar`}
+            />
           ) : (
             <IoPersonCircleOutline />
           )}
